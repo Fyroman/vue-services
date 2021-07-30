@@ -9,7 +9,7 @@ const UserService = VueService.create({
   name: 'user',
   endpoints: {
     list: {
-      url: 'http://openlibrary.org/api/books.json',
+      url: 'books.json',
       method: 'get',
       params: {
         bibkeys: 'ISBN:0201558025,LCCN:93005405',

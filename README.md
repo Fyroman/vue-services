@@ -3,14 +3,16 @@
 import VueService from 'vue-api-services'
 
 const BookService = VueService.create({
-  name: 'books',
+  name: 'books', // this.$services[name] in component
   endpoints: {
     list: {
-      url: 'http://openlibrary.org/api/books.json',
+      // If you are using Nuxt, it will use your global axios instance by default
+      url: 'books.json',
       method: 'get',
       params: {
         bibkeys: 'ISBN:0201558025,LCCN:93005405',
       },
+      // You can optionally transform response data this way
       handleResponse(data) {
         return { example: data }
       },
@@ -24,19 +26,24 @@ const BookService = VueService.create({
 })
 
 export default {
+  // Services registered here will be available using this.%services
   services: {
     BookService,
   },
   async asyncData(ctx) {
-    const userService = BookService.use(ctx) // You can use it in asyncData this way
-    return { list: await userService.list }
-  },
-  async mounted() {
-    const list = await this.$services.user.list // Or this way in component
-    console.log(list)
+    // You can use it in asyncData this way
+    const bookService = BookService.use(ctx)
+    return {
+      list: await bookService.list
+    }
   },
   created() {
     console.log(this.list)
+  },
+  async mounted() {
+    // Or this way in a component
+    const list = await this.$services.books.list
+    console.log(list)
   },
 }
 </script>
