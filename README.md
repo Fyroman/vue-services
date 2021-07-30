@@ -17,6 +17,7 @@ const BookService = VueService.create({
         return { example: data }
       },
     },
+    // It can be a method as well, obviously
     get: (id) => ({
       url: 'book/' + id,
       method: 'get',
@@ -44,6 +45,10 @@ export default {
     // Or this way in a component
     const list = await this.$services.books.list
     console.log(list)
+    
+    // In case of a method
+    const book = await this.$services.books.get(666)
+    console.log(book)
   },
 }
 </script>
