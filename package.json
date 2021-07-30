@@ -1,7 +1,6 @@
 {
   "name": "vue-services",
   "version": "1.0.0",
-  "private": true,
   "main": "lib",
   "author": "Dominik Đamić <djamic.dominik@gmail.com>",
   "scripts": {
