@@ -26,7 +26,7 @@ const BookService = VueService.create({
 })
 
 export default {
-  // Services registered here will be available using this.%services
+  // Services registered here will be available using this.$services
   services: {
     BookService,
   },
