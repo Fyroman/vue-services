@@ -84,7 +84,7 @@ function promisify(
       const handleResponse =
         config.handleResponse ||
         service.handleResponse ||
-        ctx.$serviceOptions?.handleResponse ||
+        (ctx.$serviceOptions && ctx.$serviceOptions.handleResponse) ||
         ((data: unknown) => data)
       return handleResponse(res.data)
     })
@@ -93,8 +93,8 @@ function promisify(
         const handleError =
           config.handleError ||
           service.handleError ||
-          ctx.$serviceOptions?.handleError ||
-          ((res: AxiosError) => res.response?.data || res.message)
+          (ctx.$serviceOptions && ctx.$serviceOptions.handleError) ||
+          ((res: AxiosError) => (res.response && res.response.data) || res.message)
         return handleError(err)
       }
       throw err
