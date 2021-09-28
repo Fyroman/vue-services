@@ -1,7 +1,18 @@
+## Installation
+```bash
+npm i -D vue-api-services
+```
+
+## Usage
 ```vue
 <script>
 import VueService from 'vue-api-services'
+import Vue from 'vue'
 
+// Local registration
+Vue.use(VueService)
+
+// This part would obviously suit much nicer in a separate file
 const BookService = VueService.create({
   name: 'books', // this.$services[name] in component
   endpoints: {
@@ -38,18 +49,25 @@ export default {
       list: await bookService.list
     }
   },
-  created() {
-    console.log(this.list)
-  },
   async mounted() {
     // Or this way in a component
     const list = await this.$services.books.list
-    console.log(list)
     
     // In case of a method
     const book = await this.$services.books.get(666)
-    console.log(book)
   },
 }
 </script>
+```
+
+## Nuxt
+
+Place is in modules like this for global registration.
+
+```js
+export default {
+  modules: [
+    'vue-api-services/nuxt',
+  ],
+}
 ```
