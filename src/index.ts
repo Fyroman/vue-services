@@ -7,7 +7,7 @@ import {
   AxiosError,
 } from 'axios'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const _axios = require('axios')
+import _axios from 'axios'
 
 export interface CommonConfig {
   handleResponse?: (response: AxiosResponse) => unknown
@@ -164,4 +164,4 @@ const VueService = {
   create,
 }
 
-module.exports = VueService
+export default VueService

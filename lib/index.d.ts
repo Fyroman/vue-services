@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import { Context } from '@nuxt/types';
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 export interface CommonConfig {
@@ -43,4 +43,10 @@ declare module '@nuxt/types' {
         $serviceOptions: CommonConfig;
     }
 }
-export {};
+declare function install(Vue: VueConstructor, $options?: CommonConfig): void;
+declare function create<O extends ServiceOptions>(options: O): ServiceInstance;
+declare const VueService: {
+    install: typeof install;
+    create: typeof create;
+};
+export default VueService;

@@ -1,0 +1,8 @@
+import VueService from "vue-services";
+import Vue from "vue";
+
+Vue.use(VueService, <%= serialize(options || {}) %>)
+
+export default function(ctx, inject) {
+inject('serviceOptions', <%= serialize(options || {}) %>)
+}
