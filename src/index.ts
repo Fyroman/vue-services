@@ -6,7 +6,8 @@ import {
   AxiosResponse,
   AxiosError,
 } from 'axios'
-import _axios from 'axios'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const _axios = require('axios')
 
 export interface CommonConfig {
   handleResponse?: (response: AxiosResponse) => unknown
@@ -67,15 +68,15 @@ declare module '@nuxt/types' {
 }
 
 function promisify(
-  config: EndpointConfig,
-  service: ServiceOptions,
+  config: EndpointConfig = {},
+  service: ServiceOptions = {},
   ctx: Context
 ): Promise<unknown> {
   const _ctx = ctx as unknown as { $axios: AxiosInstance }
   const axios: AxiosInstance =
     config.axios ||
     service.axios ||
-    ctx.$serviceOptions.axios ||
+    (ctx.$serviceOptions && ctx.$serviceOptions.axios) ||
     _ctx.$axios ||
     _axios
   return axios
@@ -161,4 +162,4 @@ const VueService = {
   create,
 }
 
-export default VueService
+module.exports = VueService

@@ -1,6 +1,6 @@
 {
   "name": "vue-api-services",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "lib",
   "author": "Dominik Đamić <djamic.dominik@gmail.com>",
   "scripts": {
