@@ -1,6 +1,7 @@
 import { Module } from '@nuxt/types'
 import Vue from 'vue'
-import VueService from '../'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const VueService = require('../')
 import { CommonConfig } from '../'
 import { resolve } from 'path'
 

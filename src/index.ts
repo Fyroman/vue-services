@@ -69,6 +69,7 @@ declare module '@nuxt/types' {
 
 function promisify(
   config: EndpointConfig = {},
+  // @ts-ignore
   service: ServiceOptions = {},
   ctx: Context
 ): Promise<unknown> {
@@ -96,6 +97,7 @@ function promisify(
           service.handleError ||
           (ctx.$serviceOptions && ctx.$serviceOptions.handleError) ||
           ((res: AxiosError) => (res.response && res.response.data) || res.message)
+        // @ts-ignore
         return handleError(err)
       }
       throw err
