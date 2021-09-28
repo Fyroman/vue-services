@@ -1,6 +1,6 @@
 {
   "name": "vue-api-services",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "dist/bundle.js",
   "author": "Dominik Đamić <djamic.dominik@gmail.com>",
   "scripts": {
