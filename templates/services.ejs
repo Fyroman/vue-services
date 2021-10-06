@@ -1,0 +1,9 @@
+export default function(ctx, inject) {
+    const services = <%= serialize(options || {}, { space: 2 }) %>
+    const obj = {}
+    services.files.forEach(file => {
+        const service = require('../../services/' + file).default
+        obj[service.options.name] = service.use(ctx.app.$axios)
+    })
+    inject('services', obj)
+}

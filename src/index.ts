@@ -68,34 +68,23 @@ declare module '@nuxt/types' {
 }
 
 function promisify(
-  config: EndpointConfig = {},
-  // @ts-ignore
-  service: ServiceOptions = {},
+  config: EndpointConfig,
+  service: ServiceOptions,
   ctx: Context
 ): Promise<unknown> {
   const _ctx = ctx as unknown as { $axios: AxiosInstance }
-  const axios: AxiosInstance =
-    config.axios ||
-    service.axios ||
-    (ctx.$serviceOptions && ctx.$serviceOptions.axios) ||
-    _ctx.$axios ||
-    _axios
+  const axios: AxiosInstance = getShared('axios') || _ctx.$axios || _axios
   return axios
     .request(config)
     .then((res) => {
       const handleResponse =
-        config.handleResponse ||
-        service.handleResponse ||
-        (ctx.$serviceOptions && ctx.$serviceOptions.handleResponse) ||
-        ((data: unknown) => data)
+        getShared('handleResponse') || ((data: unknown) => data)
       return handleResponse(res.data)
     })
     .catch((err: Error | AxiosError) => {
       if (_axios.isAxiosError(err)) {
         const handleError =
-          config.handleError ||
-          service.handleError ||
-          (ctx.$serviceOptions && ctx.$serviceOptions.handleError) ||
+          getShared('handleError') ||
           ((res: AxiosError) =>
             (res.response && res.response.data) || res.message)
         // @ts-ignore
@@ -103,6 +92,12 @@ function promisify(
       }
       throw err
     })
+
+  type SharedUnion = typeof config | typeof service | typeof ctx.$serviceOptions
+  type SharedKey = keyof SharedUnion
+  function getShared<K extends SharedKey>(key: K): SharedUnion[K] {
+    return config[key] || service[key] || ctx.$serviceOptions?.[key]
+  }
 }
 
 function install(Vue: VueConstructor, $options: CommonConfig = {}) {
@@ -125,7 +120,11 @@ function install(Vue: VueConstructor, $options: CommonConfig = {}) {
         $services[name] = $services[name] || service.use(this as Context)
       }
 
-      Object.assign(this, { $services })
+      if ('$services' in this) {
+        Object.assign(this['$services'], $services)
+      } else {
+        Object.assign(this, { $services })
+      }
     },
     beforeDestroy() {
       Object.assign(this, { $services: undefined })

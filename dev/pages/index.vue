@@ -3,42 +3,21 @@
 </template>
 
 <script>
-import VueService from 'vue-api-services'
-
-const UserService = VueService.create({
-  name: 'user',
-  endpoints: {
-    list: {
-      url: 'books.json',
-      method: 'get',
-      params: {
-        bibkeys: 'ISBN:0201558025,LCCN:93005405',
-      },
-      handleResponse(data) {
-        return data
-      },
-    },
-    get: (id) => ({
-      url: 'user/' + id,
-      method: 'get',
-      params: { archived: false },
-    }),
-  },
-})
-
+import BookService from '../services/BookService'
 export default {
   services: {
-    UserService,
+    BookService,
   },
   async asyncData(ctx) {
-    const userService = UserService.use(ctx)
-    return { list: await userService.list }
+    console.log(ctx.$services)
+    return { list: await ctx.$services.user.list }
   },
-  async mounted() {
+  mounted() {
     // const someUser = await this.$services.user.get(2)
     // console.log(someUser)
-    const list = await this.$services.user.list
-    console.log(list)
+    // const list = await this.$services.user.list
+    // console.log(list)
+    console.log('servisi', this.$services)
   },
   created() {
     console.log(this.list)
