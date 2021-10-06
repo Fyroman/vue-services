@@ -1,7 +1,11 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    main: './src/index.ts',
+    nuxt: './src/nuxt/index.ts',
+  },
+  target: 'node',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -10,18 +14,28 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.ejs$/,
+        use: [{ loader: 'raw-loader', options: { esModule: false } }],
+      },
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      Templates: path.resolve(__dirname, 'templates'),
+    },
+    fallback: {
+      lodash: false,
+    },
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     globalObject: 'this',
     library: {
       name: 'vueApiServices',
-      type: 'umd'
-    }
+      type: 'umd',
+    },
   },
-};
+}

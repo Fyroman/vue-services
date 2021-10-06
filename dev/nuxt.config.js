@@ -35,7 +35,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '~/../lib/nuxt',
+    '~/../nuxt/index.js',
   ],
 
   vueServices: {
@@ -45,7 +45,8 @@ export default {
   },
 
   alias: {
-    'vue-services': resolve(__dirname, '../lib'),
+    'vue-api-services': resolve(__dirname, '../dist/main.bundle.js'),
+    'vue-api-services/nuxt': resolve(__dirname, '../nuxt'),
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
