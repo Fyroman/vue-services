@@ -96,7 +96,8 @@ function promisify(
           config.handleError ||
           service.handleError ||
           (ctx.$serviceOptions && ctx.$serviceOptions.handleError) ||
-          ((res: AxiosError) => (res.response && res.response.data) || res.message)
+          ((res: AxiosError) =>
+            (res.response && res.response.data) || res.message)
         // @ts-ignore
         return handleError(err)
       }

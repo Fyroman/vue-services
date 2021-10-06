@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import VueService from '../../lib'
+import VueService from 'vue-api-services'
 
 const UserService = VueService.create({
   name: 'user',

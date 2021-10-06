@@ -1,31 +1,14 @@
 {
-  "name": "vue-api-services",
-  "version": "0.1.12",
-  "main": "./dist/main.bundle.js",
-  "types": "./types/index.d.ts",
+  "name": "vue-api-services-demo",
+  "version": "0.1.0",
   "author": "Dominik Đamić <djamic.dominik@gmail.com>",
   "scripts": {
-    "dev": "webpack -w",
-    "build": "nuxt build dev",
-    "start": "dev/node_modules/.bin/nuxt start",
-    "generate": "dev/node_modules/.bin/nuxt generate",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
     "lint:js": "dev/node_modules/.bin/eslint --ext \\\".js,.vue\\\" --ignore-path .gitignore .",
     "lint": "npm run lint:js",
     "test": "dev/node_modules/.bin/jest"
   },
-  "exports": {
-    ".": "./dist/main.bundle.js",
-    "./nuxt": "./dist/nuxt.bundle.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Fyroman/vue-services.git"
-  },
-  "files": [
-    "dist",
-    "types",
-    "nuxt"
-  ],
   "dependencies": {},
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
@@ -33,8 +16,6 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "@types/lodash.template": "^4.5.0",
-    "@types/serialize-javascript": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "@vue/test-utils": "^1.2.1",
@@ -46,16 +27,11 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
     "jest": "^27.0.5",
-    "lodash.template": "^4.5.0",
     "nuxt": "^2.15.7",
     "prettier": "^2.3.2",
-    "raw-loader": "^4.0.2",
-    "serialize-javascript": "^6.0.0",
-    "ts-loader": "^9.2.6",
-    "typescript": "^4.4.3",
     "vue-jest": "^3.0.4",
     "vue-typed-mixins": "^0.2.0",
-    "webpack": "^5.57.1",
+    "webpack": "^4.46.0",
     "webpack-cli": "^4.8.0"
   }
 }
